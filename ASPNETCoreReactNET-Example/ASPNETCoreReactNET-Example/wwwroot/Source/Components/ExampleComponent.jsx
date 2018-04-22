@@ -1,4 +1,5 @@
-﻿class ExampleComponent extends React.Component {
+﻿// This is our component.
+class ExampleComponent extends React.Component {
     render() {
         return (
             <div className="testDiv">

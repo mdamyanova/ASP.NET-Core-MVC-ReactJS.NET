@@ -8,9 +8,14 @@
 
     public class Startup
     {
-        // Changed the method from void to return IServiceProvider
+        // Changed the method from void to return IServiceProvider,
+        // otherwise we get a nasty InvalidOperationException: 
+        // Cannot resolve scoped service 
+        // 'React.AspNet.HttpContextLifetimeProvider+PerRequestRegistrations' 
+        // from root provider.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // Add React.
             services.AddReact();
 
             services.AddMvc();
@@ -31,15 +36,17 @@
                 // If you want to use server-side rendering of React components,
                 // add all the necessary JavaScript files here. This includes
                 // your components as well as all of their dependencies.
-                // See http://reactjs.net/ for more information. Example:
-                //config
-                //      .AddScript("~/Source/Components/ExampleComponent.jsx");
-                  //   .AddScript("~/Source/main.js");
+                // config
+                //      .AddScript("~/Source/Components/ExampleComponent.jsx")
+                //      .AddScript("~/Source/main.js");
 
                 // If you use an external build too (for example, Babel, Webpack,
                 // Browserify or Gulp), you can improve performance by disabling
                 // ReactJS.NET's version of Babel and loading the pre-transpiled
-                // scripts. Example:
+                // scripts.
+
+                // This is our set up for ASP.NET Core :) In older versions 
+                // you should initialise in App_Start/ReactConfig.
                 config
                   .SetLoadBabel(true)
                   .AddScriptWithoutTransform("~/dist/bundle.js")
