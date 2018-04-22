@@ -1,2 +1,2 @@
-﻿require('./test');
-document.getElementById("fillthis").innerHTML = getText();
+﻿// Expose components globally
+var Components = require('expose-loader?Components!./components');
